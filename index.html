@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>数学スコアアタック</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: graph-paper page, title block, then a list of game cards (one per row on phones, two per row on wide screens) */
+:root {
+  --paper: #f3f6f8; --grid: #dde6ec; --ink: #18324a; --ink-soft: #5b7084; --sheet: #ffffff; --line: #c9d6df; --pencil: #d9452b;
+  --c-ia: #2f6b2a; --c-kakucho: #a3304f; --c-shisu: #a35a0a; --c-taisu: #4740c2; --c-bibun: #1f5fd6; --c-beginner: #0d7f72;
+  --f-display: "Dela Gothic One", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --f-body: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) { :root {
+  --paper: #0f1a26; --grid: #182838; --ink: #e2ebf3; --ink-soft: #92a7ba; --sheet: #142231; --line: #2a3e52; --pencil: #ff7a5c;
+  --c-ia: #8fd486; --c-kakucho: #ff8fae; --c-shisu: #f2b25c; --c-taisu: #a9a4ff; --c-bibun: #6ea2ff; --c-beginner: #4fd1bd;
+  color-scheme: dark } }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background-color: var(--paper);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.6;
+}
+.wrap {
+  max-width: 880px; margin: 0 auto;
+  padding-block: max(32px, env(safe-area-inset-top, 0px)) max(48px, env(safe-area-inset-bottom, 0px));
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: flex; flex-direction: column; gap: 22px;
+}
+h1 { font-family: var(--f-display); font-weight: 400; font-size: clamp(28px, 7vw, 42px); margin: 0; letter-spacing: .02em; text-wrap: balance; }
+h1 span { color: var(--pencil); }
+.lead { margin: 0; color: var(--ink-soft); max-width: 60ch; }
+.games { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; list-style: none; margin: 0; padding: 0; }
+@media (max-width: 640px) { .games { grid-template-columns: 1fr; } }
+.game {
+  display: grid; grid-template-columns: 8px 1fr; text-decoration: none; color: inherit;
+  background: var(--sheet); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; height: 100%;
+  transition: border-color .15s, transform .1s;
+}
+.game:hover { border-color: var(--c); }
+.game:active { transform: translateY(1px); }
+.game:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
+.game .bar { background: var(--c); }
+.game .body { padding: 14px 16px; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.game .unit { font-family: var(--f-mono); font-size: 12px; letter-spacing: .08em; color: var(--c); }
+.game .name { font-family: var(--f-display); font-size: 20px; line-height: 1.3; }
+.game .desc { color: var(--ink-soft); font-size: 14px; }
+.game .meta { font-family: var(--f-mono); font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
+.notes { background: var(--sheet); border: 1px solid var(--line); border-radius: 6px; padding: 14px 18px; font-size: 14px; }
+.notes h2 { font-size: 15px; margin: 0 0 6px; }
+.notes ul { margin: 0; padding-left: 1.2em; }
+.notes li { margin-bottom: 2px; }
+@media (prefers-reduced-motion: reduce) { .game { transition: none; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header style="display:flex;flex-direction:column;gap:8px">
+    <h1>数学スコアアタック <span>×6</span></h1>
+    <p class="lead">遊びたいゲームを選んでください。4択で解いてスコアを競い、終わったら問題・自分の解答・正解・解説をPDFで保存できます。</p>
+  </header>
+
+  <ul class="games">
+    <li><a class="game" href="suu1a.html" style="--c: var(--c-ia)"><span class="bar"></span><span class="body">
+      <span class="unit">数学I・A</span><span class="name">数IAスコアアタック</span>
+      <span class="desc">展開・因数分解・2次関数・三角比・メネラウス・確率・データ</span><span class="meta">1セット × 10問</span></span></a></li>
+    <li><a class="game" href="shisu-kakucho.html" style="--c: var(--c-kakucho)"><span class="bar"></span><span class="body">
+      <span class="unit">数学II ・ 指数関数</span><span class="name">指数の拡張スコアアタック</span>
+      <span class="desc">0と負の整数の指数・累乗根・有理数の指数の計算</span><span class="meta">20セット × 10問</span></span></a></li>
+    <li><a class="game" href="shisu.html" style="--c: var(--c-shisu)"><span class="bar"></span><span class="body">
+      <span class="unit">数学II ・ 指数関数</span><span class="name">指数スコアアタック</span>
+      <span class="desc">指数の値・指数法則による計算・指数方程式</span><span class="meta">20セット × 10問</span></span></a></li>
+    <li><a class="game" href="taisu.html" style="--c: var(--c-taisu)"><span class="bar"></span><span class="body">
+      <span class="unit">数学II ・ 対数関数</span><span class="name">対数スコアアタック</span>
+      <span class="desc">対数の値・対数の計算・対数方程式（真数条件）</span><span class="meta">20セット × 10問</span></span></a></li>
+    <li><a class="game" href="bibun.html" style="--c: var(--c-bibun)"><span class="bar"></span><span class="body">
+      <span class="unit">数学III ・ 微分法</span><span class="name">微分スコアアタック</span>
+      <span class="desc">合成関数・積と商・指数関数と三角関数の微分</span><span class="meta">10セット × 20問</span></span></a></li>
+    <li><a class="game" href="bibun-beginner.html" style="--c: var(--c-beginner)"><span class="bar"></span><span class="body">
+      <span class="unit">数学III ・ 微分法</span><span class="name">微分スコアアタック ビギナー</span>
+      <span class="desc">基本公式から一歩ずつ。ヒントと公式カードつき</span><span class="meta">10セット × 20問</span></span></a></li>
+  </ul>
+
+  <section class="notes">
+    <h2>使い方のメモ</h2>
+    <ul>
+      <li>紙と鉛筆を用意して、計算してから選択肢を選びましょう。</li>
+      <li>ベストスコアは、この端末のこのブラウザにだけ記録されます。</li>
+      <li>「PDFで保存」を押すと、結果のPDFがダウンロードされます（iPadでは「ファイル」アプリの「ダウンロード」に入ります）。</li>
+    </ul>
+  </section>
+</div>
+</body>
+</html>
